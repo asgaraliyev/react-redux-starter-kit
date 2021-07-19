@@ -1,69 +1,28 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { UnAuthenticatedRouters, AuthenticatedRouters } from "./routes";
-
+import { BrowserRouter as Router,Route,  Switch } from 'react-router-dom';
+import layouts from './routes';
+import NotFound from '../pages/NotFound';
 export default function Index() {
-
-  /**
-   * 
-   * @returns Route with component and that component will be wrapped in layout,
-   *          these routes are available for private routes
-   */
-  function UnAuthenticatedSwitch() {
-    return (
-      <Switch>
-        {UnAuthenticatedRouters.map(({path, exact, component: Component, layout: Layout }, _key) => {
-          return (
-            <Route
-              key={_key}
-              path={path}
-              exact={exact}
-              render={(props) => {
-                return (
-                  <Layout>
-                    <Component  {...props} />
-                  </Layout>
-                )
-              }}
-            />
-          );
-        })}
-      </Switch>
-    );
-  }
-
-  /**
-   * 
-   * @returns Route with component and that component will be wrapped in layout,
-   *          these routes are available for public routes
-   * 
-   */
-  function AuthenticatedSwitch() {
-    return (
-      <Switch>
-        {AuthenticatedRouters.map(({path, exact, component: Component, layout: Layout }, _key) => {
-          return (
-            <Route
-              key={_key}
-              path={path}
-              exact={exact}
-              render={(props) => {
-                return (
-                  <Layout>
-                    <Component  {...props} />
-                  </Layout>
-                )
-              }}
-            />
-          );
-        })}
-      </Switch>
-    );
-  }
-
   return (
     <Router>
-      <UnAuthenticatedSwitch />
-      <AuthenticatedSwitch />
+      <Switch>
+        {layouts.map((layout,i) => {
+          const Layout = layout.layout;
+          return (
+            <Route key={i} path={layout.pages.map((page) => page.path)}>
+              <Layout>
+                <Switch>
+                  {layout.pages.map((route, i) => {
+                    const Mode=route.mode
+                    return <Mode key={i} exact={true} path={route.path} component={route.component} />;
+                  })}
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </Layout>
+            </Route>
+          );
+        })}
+        <Route path="*" component={NotFound} />
+      </Switch>
     </Router>
   );
 }

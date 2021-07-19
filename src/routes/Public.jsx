@@ -1,8 +1,7 @@
 import { Route } from 'react-router-dom';
-export default function Public({ children, path }) {
-
+export default function Public({ children, ...rest }) {
   return (
-    <Route path={path} exact>
+    <Route {...rest} exact>
       {children}
     </Route>
   );
