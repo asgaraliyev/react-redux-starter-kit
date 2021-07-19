@@ -1,20 +1,31 @@
-import Home from '../pages/Home';
-import Login from '../pages/Login';
+import Home from "../pages/Home";
+import Login from "../pages/Login";
 import Main from '../layouts/Main';
 import Auth from '../layouts/Auth';
-export default [
+
+/**
+ * UnAuthenticatedRouters: These routers are only available for logged users. (Tip: We can change the name to Private routers )
+ */
+const UnAuthenticatedRouters = [
   {
+    path: "/",
+    exact: true,
     component: Home,
-    path: '/home',
-    isPrivate: true,
-    layout: Main,
-    lyt:"main"
-  },
-  {
-    component: Login,
-    path: '/login',
-    isPrivate: false,
-    layout: Auth,
-    lyt:"auth"
+    layout: Main
   },
 ];
+
+
+/**
+ * UnAuthenticatedRouters: These routers are available for all users. (Tip: We can change the name to Public routers )
+ */
+const AuthenticatedRouters = [
+  {
+    path: "/login",
+    exact: true,
+    component: Login,
+    layout: Auth
+  },
+];
+
+export {UnAuthenticatedRouters, AuthenticatedRouters}

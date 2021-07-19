@@ -1,40 +1,69 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Main from '../layouts/Main';
-import Auth from '../layouts/Auth';
-import routes from './routes';
-import Private from './Private';
-import Public from './Public';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { UnAuthenticatedRouters, AuthenticatedRouters } from "./routes";
+
 export default function Index() {
+
+  /**
+   * 
+   * @returns Route with component and that component will be wrapped in layout,
+   *          these routes are available for private routes
+   */
+  function UnAuthenticatedSwitch() {
+    return (
+      <Switch>
+        {UnAuthenticatedRouters.map(({path, exact, component: Component, layout: Layout }, _key) => {
+          return (
+            <Route
+              key={_key}
+              path={path}
+              exact={exact}
+              render={(props) => {
+                return (
+                  <Layout>
+                    <Component  {...props} />
+                  </Layout>
+                )
+              }}
+            />
+          );
+        })}
+      </Switch>
+    );
+  }
+
+  /**
+   * 
+   * @returns Route with component and that component will be wrapped in layout,
+   *          these routes are available for public routes
+   * 
+   */
+  function AuthenticatedSwitch() {
+    return (
+      <Switch>
+        {AuthenticatedRouters.map(({path, exact, component: Component, layout: Layout }, _key) => {
+          return (
+            <Route
+              key={_key}
+              path={path}
+              exact={exact}
+              render={(props) => {
+                return (
+                  <Layout>
+                    <Component  {...props} />
+                  </Layout>
+                )
+              }}
+            />
+          );
+        })}
+      </Switch>
+    );
+  }
+
   return (
     <Router>
-      <Switch>
-        <Route path="/auth">
-          <Auth>
-            {routes.map(({ path, lyt, component: Component, ...rest }, i) => {
-              if (lyt === 'auth') {
-                console.log(path);
-                return (
-                  <Public key={i} {...rest}>
-                    <Component />
-                  </Public>
-                );
-              }
-            })}
-          </Auth>
-        </Route>
-        <Route path="/main">
-          <Main>
-            {routes.map(({ path, lyt, component: Component, ...rest }, i) => {
-              if (lyt === 'main')
-                return (
-                  <Private key={i} {...rest}>
-                    <Component />
-                  </Private>
-                );
-            })}
-          </Main>
-        </Route>
-      </Switch>
+      <UnAuthenticatedSwitch />
+      <AuthenticatedSwitch />
     </Router>
   );
 }
