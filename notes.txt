@@ -1,0 +1,7 @@
+Alertin sturukturu
+1.Type ["success","danger","primary","warning","info"]
+2.Icon default olarag type gore secilecek.Eger icon gonderilibse icon hemin icon eks olunacaq
+3.Title required
+4.Details optional
+5.Saniye
+6.close default false eger true gonderilse close btn active olacag 

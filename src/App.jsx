@@ -1,8 +1,10 @@
-import Routes from "./routes/Index"
+import Routes from './routes/Index';
+import Panel from './components/Panel';
 function App() {
   return (
     <div id="app">
-     <Routes/>
+      <Panel />
+      <Routes />
     </div>
   );
 }

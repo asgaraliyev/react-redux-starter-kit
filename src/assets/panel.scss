@@ -1,0 +1,22 @@
+#panel {
+}
+#panel.alert-panel{
+    position: fixed;
+    max-width: 600px;
+    background:green;
+    float: right;
+    color:white;
+    right: 1em;
+    top:1em;
+    padding: 0.3em 1em;
+    box-shadow: 0px 0px 10px green;
+    border-radius: 0.3em;        
+}
+#panel.modal-panel {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
