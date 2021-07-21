@@ -18,8 +18,7 @@ const AlertReducer = (state = initialState, action) => {
       title: title,
       details: details,
     };
-  }else {
-    throw new Error(`Unsupported action type ${action.type}`)
   }
+  return state;
 };
 export default AlertReducer;
