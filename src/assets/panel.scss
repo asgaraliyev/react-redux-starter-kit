@@ -1,20 +1,29 @@
-#panel {
-}
-#panel .alert-panel{
-    position: fixed;
-    max-width: 600px;
-    float: right;
-    color:white;
-    right: 1em;
-    top:1em;
-    padding: 0.3em 1em;
-    border-radius: 0.3em;  
-    .title{
-      font-weight: bold;
-    }
-    .details{
-      font-size: 0.7em;
-    }      
+#panel .alert-panel {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  float: right;
+  color: white;
+  top: 1em;
+  padding: 0.5em 1em;
+  border-radius: 0.1em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+  .title {
+    font-weight: bold;
+  }
+  .details {
+    font-size: 0.7em;
+  }
+
+  .icon-area {
+    margin-right: 1em;
+  }
+
 }
 #panel.modal-panel {
   width: 100vw;

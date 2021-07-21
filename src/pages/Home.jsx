@@ -1,26 +1,32 @@
 import { Link } from "react-router-dom";
-// import Panel from "../components/Panel/Index"
 export default function Home() {
-
-  // this function will open alert panel with using global function
+  /**
+   * this function will open alert with using global function
+   */
   function openAlert() {
     const data = {
       status: true,
-      type: "danger",
-      icon: "fa fa-times-circle",
-      title: "Error",
-      details: "Change T-shirt color",
+      type: "warning",
+      icon: "fa fa-exclamation-triangle",
+      title: "This is a danger message",
+      details: "Great",
     };
-    
+
     window.panel(data);
   }
+  /**
+   * this function will close alert with using global function
+   */
+  function closeAlert() {
+    window.panel({ status: false });
+  }
+
   return (
     <div id="home">
       <Link to="/profile">Profile</Link>
       <h1>Home</h1>
-      <button onClick={openAlert}>Alert</button>
-      <i className="fa fa-address-book"></i>
-      <i className="fa fa-spinner"></i>
+      <button className="btn" onClick={openAlert}>Open Alert</button>
+      <button className="btn" onClick={closeAlert}>Close Alert</button>
     </div>
   );
 }

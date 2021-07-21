@@ -1,9 +1,21 @@
-import { useSelector } from 'react-redux';
-import typeStyles from "./styles"
+import { useEffect, useState } from "react";
+import typeStyles from "./styles";
+
 export default function Panel() {
-  const alert = useSelector((state) => state.AlertReducer);
-  //TODO:check modal status by or
-  if (alert?.status === true) return <div id="panel">{alert?.status === true && <Alert data={alert} />}</div>;
+  const [alertData, setAlertData] = useState({});
+
+  useEffect(() => {
+    window.__proto__.panel = function (data) {
+      setAlertData(data);
+    };
+  }, []);
+
+  if (alertData?.status === true)
+    return (
+      <div id="panel">
+        {alertData?.status === true && <Alert data={alertData} />}
+      </div>
+    );
   else return <></>;
 }
 
@@ -12,22 +24,34 @@ function Modal() {
 }
 
 function Alert({ data }) {
-  console.log(data);
   return (
     <>
       {Object.keys(typeStyles).map((type, i) => {
         if (type === data.type) {
           const styles = typeStyles[type];
-          console.log(styles)
           return (
-            <div id="alert" className="alert-panel" key={i} style={{ boxShadow: `${styles.boxShadow} 0 0 10px`, backgroundColor: styles.background }}>
-              <i style={{ color: styles.iconColor }} className={data.icon}></i>
-              <p style={{ color: styles.title }} className="title">
-                {data.title}
-              </p>
-              <p className="details" style={{ color: styles.message }}>
-                {data.details}
-              </p>
+            <div
+              id="alert"
+              className="alert-panel"
+              key={i}
+              style={{
+                backgroundColor: styles.background,
+              }}
+            >
+              <div className="icon-area">
+                <i
+                  style={{ color: styles.iconColor }}
+                  className={data.icon}
+                ></i>
+              </div>
+              <div className="text-area">
+                <p style={{ color: styles.title }} className="title">
+                  {data.title}
+                </p>
+                <p className="details" style={{ color: styles.message }}>
+                  {data.details}
+                </p>
+              </div>
             </div>
           );
         }

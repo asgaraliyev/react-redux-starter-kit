@@ -6,7 +6,6 @@ import store from './redux';
 import {Provider} from "react-redux"
 import 'font-awesome/css/font-awesome.min.css';
 import "./assets/main.scss"
-import "./components/Panel/source"
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
