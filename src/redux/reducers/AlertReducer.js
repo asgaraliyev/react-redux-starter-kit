@@ -8,7 +8,7 @@ const initialState = {
   close: true,
 };
 const AlertReducer = (state = initialState, action) => {
-  if (action.type === "active") {
+  /* if (action.type === "active") {
     const {status, type, icon, title, details} = action.data;
     return {
       ...state,
@@ -18,7 +18,13 @@ const AlertReducer = (state = initialState, action) => {
       title: title,
       details: details,
     };
-  }
+  }else if(action.type === 'deactive'){
+    const {status} = action.data;
+    return {
+      ...state,
+      status: status
+    }
+  } */
   return state;
 };
 export default AlertReducer;

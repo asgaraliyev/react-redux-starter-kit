@@ -1,17 +1,17 @@
 #panel .alert-panel {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 600px;
   float: right;
-  color: white;
-  top: 1em;
+  background: white;
   padding: 0.5em 1em;
   border-radius: 0.1em;
   left: 50%;
-  transform: translate(-50%, 0);
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  animation: open 1s cubic-bezier(0.47, 0, 0.745, 0.715);
+  transform: translate(-50%, 1.5em);
 
   .title {
     font-weight: bold;
@@ -24,6 +24,29 @@
     margin-right: 1em;
   }
 
+  @keyframes open {
+    0% {
+      transform: translate(-50%, -1em);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translate(-50%, 1.5em);
+      opacity: 1;
+    }
+  }
+
+  @keyframes close {
+    0% {
+      transform: translate(-50%, 1.5em);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translate(-50%, -1em);
+      opacity: 0;
+    }
+  }
 }
 #panel.modal-panel {
   width: 100vw;

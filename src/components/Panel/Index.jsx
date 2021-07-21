@@ -1,36 +1,73 @@
-import { useEffect, useState } from "react";
+import {
+  createRef,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import typeStyles from "./styles";
 
 export default function Panel() {
+  const alertPanelRef = createRef();
+
   const [alertData, setAlertData] = useState({});
-
   useEffect(() => {
-    window.__proto__.panel = function (data) {
-      setAlertData(data);
+    console.log('inside useeffect')
+    window.__proto__.panel = function ({
+      status = true,
+      type = "info",
+      icon = "fa fa-info-circle",
+      title,
+      details = null,
+      seconds = 3,
+    }) {
+      setAlertData({
+        title,
+        details,
+        type,
+        icon,
+        status,
+      });
+      setTimeout(function () {
+        if (alertData?.status === true) setAlertData({});
+      }, seconds * 1000);
     };
-  }, []);
+  }, [alertData?.status]);
 
-  if (alertData?.status === true)
+  if (alertData?.status === true) {
+    console.log("inside if")
     return (
       <div id="panel">
-        {alertData?.status === true && <Alert data={alertData} />}
+        {alertData?.status && <Alert data={alertData} ref={alertPanelRef} />}
       </div>
     );
-  else return <></>;
+  } else return <></>;
 }
 
 function Modal() {
   return <></>;
 }
 
-function Alert({ data }) {
+const Alert = forwardRef(({ data }, ref) => {
+  const alertRef = useRef();
+
+  useImperativeHandle(ref, () => {
+    setTimeout(() => {
+      console.log("second set time out");
+      alertRef.current.style.animation = "close 1s linear";
+    }, 3000);
+  });
+
   return (
     <>
       {Object.keys(typeStyles).map((type, i) => {
         if (type === data.type) {
           const styles = typeStyles[type];
+          console.log(styles);
           return (
             <div
+              ref={alertRef}
               id="alert"
               className="alert-panel"
               key={i}
@@ -48,9 +85,11 @@ function Alert({ data }) {
                 <p style={{ color: styles.title }} className="title">
                   {data.title}
                 </p>
-                <p className="details" style={{ color: styles.message }}>
-                  {data.details}
-                </p>
+                {data.details && (
+                  <p className="details" style={{ color: styles.message }}>
+                    {data.details}
+                  </p>
+                )}
               </div>
             </div>
           );
@@ -58,4 +97,4 @@ function Alert({ data }) {
       })}
     </>
   );
-}
+});

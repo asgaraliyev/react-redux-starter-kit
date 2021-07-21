@@ -5,11 +5,10 @@ export default function Home() {
    */
   function openAlert() {
     const data = {
-      status: true,
       type: "warning",
-      icon: "fa fa-exclamation-triangle",
-      title: "This is a danger message",
-      details: "Great",
+      // icon: "fa fa-times-circle",
+      title: "This is a warning message",
+      details: "Warning",
     };
 
     window.panel(data);
