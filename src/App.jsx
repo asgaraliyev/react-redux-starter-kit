@@ -1,5 +1,6 @@
 import Routes from './routes/Index';
-import Panel from './components/Panel';
+import Panel from './components/Panel/Index';
+
 function App() {
   return (
     <div id="app">
