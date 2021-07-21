@@ -5,7 +5,7 @@ export default function Home() {
    */
   function openAlert() {
     const data = {
-      type: "warning",
+      type: "danger",
       seconds:5,
       // icon: "fa fa-times-circle",
       title: "This is a warning message",

@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux';
 import {Provider} from "react-redux"
 import 'font-awesome/css/font-awesome.min.css';
-import "./assets/main.scss"
+import "./assets/style/main.scss"
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

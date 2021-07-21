@@ -5,6 +5,7 @@ export default {
     boxShadow: 'green',
     background: 'white',
     iconColor: 'green',
+    iconName: 'fa fa-check',
   },
   primary: {
     title: 'black',
@@ -12,6 +13,7 @@ export default {
     boxShadow: 'blue',
     background: 'white',
     iconColor: 'blue',
+    iconName: 'fa fa-info-circle',
   },
   info: {
     title: 'black',
@@ -19,6 +21,7 @@ export default {
     boxShadow: 'light-blue',
     background: 'white',
     iconColor: 'light-blue',
+    iconName: 'fa fa-info-circle',
   },
   danger: {
     title: 'black',
@@ -26,6 +29,7 @@ export default {
     boxShadow: 'red',
     background: 'white',
     iconColor: 'red',
+    iconName: 'fa fa-times-circle',
   },
   warning: {
     title: 'black',
@@ -33,5 +37,6 @@ export default {
     boxShadow: 'orange',
     background: 'white',
     iconColor: 'orange',
+    iconName: 'fa fa-exclamation-triangle',
   },
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import typeStyles from "./styles";
+import typeStyles from "../../assets/contstants/alert-panel-style.js";
 
 const AlertPanel = () => {
   const [alertData, setAlertData] = useState({});
@@ -8,11 +8,12 @@ const AlertPanel = () => {
     window.__proto__.alertPanel = function ({
       status = true,
       type = "info",
-      icon = "fa fa-info-circle",
+      icon,
       title,
       details = null,
       seconds = 3,
     }) {
+      if(!icon)icon=typeStyles[type]?.iconName
       setAlertData({
         title,
         details,
@@ -37,7 +38,6 @@ const AlertPanel = () => {
   useEffect(() => {
     if (alertData.status === true) {
       const alertEl = document.querySelector("#panel #alert");
-      console.log(alertEl);
       setTimeout(function () {
         alertEl.classList.add("animation-end");
       }, endSec - 500);
