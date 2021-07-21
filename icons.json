@@ -1,0 +1,22 @@
+[
+    {
+        "iconType": "success",
+        "iconName": "fa fa-check"
+    },
+    {
+        "iconType": "danger",
+        "iconName": "fa fa-times-circle"
+    },
+    {
+        "iconType": "warning",
+        "iconName": "fa fa-exclamation-triangle"
+    },
+    {
+        "iconType": "info",
+        "iconName": "fa fa-info-circle"
+    },
+    {
+        "iconType": "primary",
+        "iconName": ""
+    }
+]
