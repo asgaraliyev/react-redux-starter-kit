@@ -6,18 +6,19 @@ export default function Home() {
   function openAlert() {
     const data = {
       type: "warning",
+      seconds:5,
       // icon: "fa fa-times-circle",
       title: "This is a warning message",
       details: "Warning",
     };
 
-    window.panel(data);
+    window.alertPanel(data);
   }
   /**
    * this function will close alert with using global function
    */
   function closeAlert() {
-    window.panel({ status: false });
+    window.alertPanel({ status: false });
   }
 
   return (

@@ -1,10 +1,10 @@
-import Routes from './routes/Index';
-import Panel from './components/Panel/Index';
+import Routes from "./routes/Index";
+import  AlertPanel  from "./components/Panel/AlertPanel";
 
 function App() {
   return (
     <div id="app">
-      <Panel />
+      <AlertPanel />
       <Routes />
     </div>
   );
