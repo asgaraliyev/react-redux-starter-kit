@@ -1,13 +1,25 @@
 const initialState = {
-  status: true,
-  type: 'success',
-  icon: 'fa-clipboard-check',
-  title: 'You successfully send this message',
-  details: 'aksjd ansdas aksjd ',
-  seconds: 3,
+  status: false,
+  type: "",
+  icon: "",
+  title: "",
+  details: "",
+  seconds: 0,
   close: true,
 };
 const AlertReducer = (state = initialState, action) => {
-  return state;
+  if (action.type === "active") {
+    const {status, type, icon, title, details} = action.data;
+    return {
+      ...state,
+      status: status,
+      type: type,
+      icon: icon,
+      title: title,
+      details: details,
+    };
+  }else {
+    throw new Error(`Unsupported action type ${action.type}`)
+  }
 };
 export default AlertReducer;

@@ -12,8 +12,7 @@ function Modal() {
 }
 
 function Alert({ data }) {
-  const { type } = data;
-
+  console.log(data);
   return (
     <>
       {Object.keys(typeStyles).map((type, i) => {
@@ -22,7 +21,7 @@ function Alert({ data }) {
           console.log(styles)
           return (
             <div id="alert" className="alert-panel" key={i} style={{ boxShadow: `${styles.boxShadow} 0 0 10px`, backgroundColor: styles.background }}>
-              <i style={{ color: styles.iconColor }} className="fa fa-check"></i>
+              <i style={{ color: styles.iconColor }} className={data.icon}></i>
               <p style={{ color: styles.title }} className="title">
                 {data.title}
               </p>
