@@ -1,30 +1,29 @@
-import { useEffect, useState } from 'react';
-let count = 0;
-export default function ModalPanel() {
-  const [runned, setRunned] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  let Component;
-  function toggleRunned() {
-    setRunned(!runned);
-  }
+import {useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import store from '../../redux/index';
+function ModalPanel({ children, body,id }) {
+  const MyBody = body;
+  const [modal,setModal]=useState({})
+  const state = useSelector((state) => state.modal);
   useEffect(() => {
-    const modalPromise = function ({ component, leftBtn, rightBtn, title }) {
-      const mainPromise = new Promise((resovle, reject) => {});
-
-      mainPromise.__proto__.open = function () {
-        window.myModalComponent = component;
-        setIsActive(true);
-        toggleRunned();
-      };
-      mainPromise.__proto__.close = function () {
-        toggleRunned();
-        window.myModalComponent = undefined;
-        setIsActive(false);
-      };
-      return mainPromise;
-    };
-    window.__proto__.ModalPanel = modalPromise;
-  }, [runned]);
-  Component = window.myModalComponent;
-  return <div id="salam">{isActive && <Component />}</div>;
+    const modal=state.find((item)=>item?.id===id)
+    setModal(modal)
+  }, [state])
+  return (
+    <>
+      {modal?.active && (
+        <div id="modal-panel">
+          <div className="body">{MyBody && <MyBody />}</div>
+        </div>
+      )}
+      {children}
+    </>
+  );
 }
+ModalPanel.__proto__.close = function (id) {
+  store.dispatch({ type: 'deactive' ,id});
+};
+ModalPanel.__proto__.open =  function (id) {
+  store.dispatch({ type: 'active' ,id});
+};
+export default ModalPanel;

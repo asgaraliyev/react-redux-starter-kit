@@ -1,47 +1,55 @@
 import { useEffect, useState } from 'react';
-
+import ModalPanel from '../components/Panel/ModalPanel';
 export default function Login() {
-  const [modal, setModal] = useState(null);
-  const [modal2, setModal2] = useState(null);
-  useEffect(()=>{
-    const myModal = new window.ModalPanel({ component: MyComponent1 });
-    setModal(myModal)
-  },[])
-  useEffect(()=>{
-    const myModal2 = new window.ModalPanel({ component: MyComponent2 });
-    setModal2(myModal2)
-  },[])
   return (
     <div id="login">
-      <button onClick={() => {
-          modal.open()
-      }}>1Ac</button>
-      <button
-        onClick={() => {
-          modal.close();
-        }}
-      >
-        1Bagla
-      </button>
-      <button onClick={() => {
-          modal2.open()
-      }}>2Ac</button>
-      <button
-        onClick={() => {
-          modal2.close();
-        }}
-      >
-        2Bagla
-      </button>
+      <ModalPanel body={ModalComp} id="1">
+        <button onClick={()=>{
+          ModalPanel.open("1")
+        }}>First me</button>
+      </ModalPanel>
+      <ModalPanel body={ModalComp2} id="2">
+        <button onClick={()=>{
+          ModalPanel.open("2")
+        }}>Second me</button>
+      </ModalPanel>
       <h1>Login</h1>
     </div>
   );
 }
 
-function MyComponent1() {
-  return <h1>Salam Aleykum1 </h1>;
+function ModalComp() {
+  return (
+    <>
+      <header> First Modal</header>
+      <button
+        onClick={() => {
+          ModalPanel.close("1");
+        }}
+      >
+        Close First Modal
+      </button>
+      <button onClick={()=>{
+        ModalPanel.close("1")
+      }}>I am 100% sure pls close</button>
+    </>
+  );
 }
-function MyComponent2() {
-    return <h1>Salam Aleykum2 </h1>;
-  }
-  
+
+function ModalComp2() {
+  return (
+    <>
+      <header> Second Modal</header>
+      <button
+        onClick={() => {
+          ModalPanel.close("2");
+        }}
+      >
+        Close Second Modal
+      </button>
+      <button onClick={()=>{
+        ModalPanel.close("2")
+      }}>I am 100% sure pls close</button>
+    </>
+  );
+}
