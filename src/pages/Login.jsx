@@ -1,55 +1,59 @@
-import { useEffect, useState } from 'react';
-import ModalPanel from '../components/Panel/ModalPanel';
+
+import React,{ useEffect, useState } from 'react';
+import Modal from 'react-modal';
+const customStyles = {
+  content: {
+    // top: '50%',
+    // left: '50%',
+    // right: 'auto',
+    // bottom: 'auto',
+    // marginRight: '-50%',
+    // transform: 'translate(-50%, -50%)',
+  },
+};
+
 export default function Login() {
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <div id="login">
-      <ModalPanel body={ModalComp} id="1">
-        <button onClick={()=>{
-          ModalPanel.open("1")
-        }}>First me</button>
-      </ModalPanel>
-      <ModalPanel body={ModalComp2} id="2">
-        <button onClick={()=>{
-          ModalPanel.open("2")
-        }}>Second me</button>
-      </ModalPanel>
+   
+   <div>
+      <button onClick={openModal}>Open Modal</button>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+      </Modal>
+    </div>
       <h1>Login</h1>
     </div>
-  );
-}
-
-function ModalComp() {
-  return (
-    <>
-      <header> First Modal</header>
-      <button
-        onClick={() => {
-          ModalPanel.close("1");
-        }}
-      >
-        Close First Modal
-      </button>
-      <button onClick={()=>{
-        ModalPanel.close("1")
-      }}>I am 100% sure pls close</button>
-    </>
-  );
-}
-
-function ModalComp2() {
-  return (
-    <>
-      <header> Second Modal</header>
-      <button
-        onClick={() => {
-          ModalPanel.close("2");
-        }}
-      >
-        Close Second Modal
-      </button>
-      <button onClick={()=>{
-        ModalPanel.close("2")
-      }}>I am 100% sure pls close</button>
-    </>
   );
 }

@@ -1,12 +1,12 @@
 import Routes from "./routes/Index";
 import  AlertPanel  from "./components/Panel/AlertPanel";
-import  ModalPanel  from "./components/Panel/ModalPanel";
+import Modal from 'react-modal';
 
 function App() {
+  Modal.setAppElement('#root');
   return (
     <div id="app">
       <AlertPanel />
-      <ModalPanel />
       <Routes />
     </div>
   );
